@@ -1,0 +1,106 @@
+miniCRAN v0.0-15 (Release date: 2014-07-23)
+==============
+
+Changes:
+
+* Added examples for plot.pkgDepGraph
+* Added package vignette
+
+
+miniCRAN v0.0-14 (Release date: 2014-07-22)
+==============
+
+Changes:
+
+* Additional control in arguments to plot.pkgDepGraph()
+
+
+miniCRAN v0.0-13 (Release date: 2014-07-21)
+==============
+
+Changes:
+
+* Fixed more inconsistencies between pkgDep() and makeDepGraph()
+
+
+miniCRAN v0.0-12 (Release date: 2014-07-16)
+==============
+
+Changes:
+
+* Fixed inconsistencies between pkgDep() and makeDepGraph()
+
+
+
+miniCRAN v0.0-11 (Release date: 2014-07-12)
+==============
+
+Changes:
+
+* Added plot method for makeDepGraph
+* Removed dependency on igraph, now SUGGESTS igraph instead
+
+
+
+miniCRAN v0.0-10 (Release date: 2014-07-01)
+==============
+
+Changes:
+
+* General improvements and bug fixes.
+
+
+miniCRAN v0.0-08 (Release date: 2014-06-05)
+==============
+
+New functionality:
+
+* New function makeLibrary() downloads files into a local library
+* Function makeRepo() now creates a proper repository structure for source, win.binary, mac.binary, etc.
+
+Changes:
+
+* It is now possible to specify the argument enchances=TRUE in pgkDeps() to include packages that are enhanced.
+
+Documentation changes:
+
+* Added instructions and demonstration code for making a local repo in makeRepo(), including instructions for using the local repo.
+
+
+miniCRAN v0.0-07 (Release date: 2014-05-28)
+==============
+
+New functionality:
+
+* New function getCranDescription() that scrapes information from the CRAN website for each package.
+
+miniCRAN v0.0-06 (Release date: 2014-05-27)
+==============
+
+New functionality:
+
+* New function makeDepGraph() to create an igraph representation of the selected package dependencies
+* New function makeRsyncInclude() to create include file for use with rsync (experimental)
+
+miniCRAN v0.0-05 (Release date: 2014-05-22)
+==============
+
+Enhancements:
+
+* Enhanced error checking for pkgDep(), e.g. checking for non-existent top-level packages.
+* Modified pkgDep() to selectively includes suggests dependencies
+* Improved error messages
+* New function pkgAvail(), a wrapper around available.packages()
+
+
+miniCRAN v0.0-01 (Release date: 2014-01-30)
+==============
+
+First commit.
+
+New functionality:
+
+* pkgDep()
+* makeRepo()
+
+
