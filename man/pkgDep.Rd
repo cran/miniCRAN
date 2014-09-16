@@ -4,7 +4,7 @@
 \title{Retrieves package dependencies.}
 \usage{
 pkgDep(pkg, availPkgs, repos = getOption("repos"), type = "source",
-  depends = TRUE, suggests = TRUE, enhances = FALSE, path,
+  depends = TRUE, suggests = TRUE, enhances = FALSE,
   includeBasePkgs = FALSE, ...)
 }
 \arguments{
@@ -14,15 +14,13 @@ pkgDep(pkg, availPkgs, repos = getOption("repos"), type = "source",
 
 \item{repos}{URL(s) of the 'contrib' sections of the repositories. Passed to \code{\link{available.packages}}}
 
-\item{type}{Passed to \code{\link{available.packages}}}
+\item{type}{Possible values are (currently) "source", "mac.binary" and "win.binary": the binary types can be listed and downloaded but not installed on other platforms.  Passed to \code{\link{download.packages}}.}
 
 \item{depends}{If TRUE, retrieves Depends, Imports and LinkingTo dependencies (non-recursively)}
 
 \item{suggests}{If TRUE, retrieves Suggests dependencies (non-recursively)}
 
 \item{enhances}{If TRUE, retrieves Enhances dependencies (non-recursively)}
-
-\item{path}{Destination download path}
 
 \item{includeBasePkgs}{If TRUE, include base R packages in results}
 
@@ -35,19 +33,26 @@ Performs recursive retrieve for \code{Depends}, \code{Imports} and \code{LinkLib
 This
 }
 \examples{
+
+\dontrun{
 pkgDep(pkg=c("ggplot2", "plyr", "reshape2"), 
        repos=c(CRAN="http://cran.revolutionanalytics.com")
 )
+}
 
+pdb <- cranJuly2014
+\dontrun{
+pdb <- pkgAvail(repos=c(CRAN="http://cran.revolutionanalytics.com"))
+}
 
-pdb <- pkgAvail()
 pkgDep(pkg=c("ggplot2", "plyr", "reshape2"), pdb)
 
 }
 \seealso{
-makeDepGraph
+\code{\link{makeDepGraph}}
 
-Other miniCRAN: \code{\link{getCranDescription}};
-  \code{\link{pkgAvail}}
+Other miniCRAN.functions: \code{\link{basePkgs}};
+  \code{\link{makeDepGraph}}; \code{\link{makeRepo}};
+  \code{\link{pkgAvail}}; \code{\link{plot.pkgDepGraph}}
 }
 

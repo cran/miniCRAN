@@ -4,7 +4,7 @@
 \title{Create dependency graph from available packages.}
 \usage{
 makeDepGraph(pkg, availPkgs, repos = getOption("repos"), type = "source",
-  path, suggests = TRUE, enhances = FALSE, includeBasePkgs = FALSE, ...)
+  suggests = TRUE, enhances = FALSE, includeBasePkgs = FALSE, ...)
 }
 \arguments{
 \item{pkg}{Character vector of packages.}
@@ -13,9 +13,7 @@ makeDepGraph(pkg, availPkgs, repos = getOption("repos"), type = "source",
 
 \item{repos}{URL(s) of the 'contrib' sections of the repositories. Passed to \code{\link{available.packages}}}
 
-\item{type}{Passed to \code{\link{available.packages}}}
-
-\item{path}{Destination download path}
+\item{type}{Possible values are (currently) "source", "mac.binary" and "win.binary": the binary types can be listed and downloaded but not installed on other platforms.  Passed to \code{\link{download.packages}}.}
 
 \item{suggests}{If TRUE, retrieves Suggests dependencies (non-recursively)}
 
@@ -30,21 +28,19 @@ Each package is a node, and a dependency is an edge
 }
 \examples{
 
-p <- makeDepGraph(
-  c("ggplot2", "forecast"), 
-  repos = c(CRAN="http://cran.revolutionanalytics.com"), 
-  type="source"
-  )
-if(require(igraph)) plot(p)
 
 
+availPkgs <- cranJuly2014
 
-
+\dontrun{
 availPkgs <- pkgAvail(
   repos = c(CRAN="http://cran.revolutionanalytics.com"),
   type="source"
   )
+}
 
+
+# Create dependency graph using stored database of available packages
 p <- makeDepGraph(
   c("ggplot2", "forecast"), 
   availPkgs = availPkgs
@@ -52,8 +48,24 @@ p <- makeDepGraph(
 
 if(require(igraph)) plot(p)
 
+
+
+\dontrun{
+  # Create dependency graph using newly retrieved database from CRAN
+  
+  p <- makeDepGraph(
+  c("ggplot2", "forecast"), 
+  repos = c(CRAN="http://cran.revolutionanalytics.com"), 
+  type="source"
+)
+if(require(igraph)) plot(p)
+}
 }
 \seealso{
-pkgDep plot.pkgDepGraph
+\code{\link{pkgDep}}, \code{\link{plot.pkgDepGraph}}
+
+Other miniCRAN.functions: \code{\link{basePkgs}};
+  \code{\link{makeRepo}}; \code{\link{pkgAvail}};
+  \code{\link{pkgDep}}; \code{\link{plot.pkgDepGraph}}
 }
 
