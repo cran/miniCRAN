@@ -4,6 +4,8 @@ checkPkgDepFunctions <- function(pkg, availPkgs = cranJuly2014,
                                  suggests=TRUE, 
                                  enhances=FALSE, 
                                  includeBasePkgs=FALSE){
+  
+  require(igraph)
   p1 <- pkgDep(pkg, availPkgs=availPkgs, 
                repos=repos, type=type, 
                suggests=suggests, enhances=enhances, 
@@ -31,14 +33,19 @@ context("makeDepGraph ")
 
 test_that("makeDepGraph and pgkDep gives similar results for MASS", {
   
+  
   tag <- "MASS"
   
   expect_true(
     checkPkgDepFunctions(tag)
   )
+
+  skip_on_cran()
+  
   expect_true(
     checkPkgDepFunctions(tag, includeBasePkgs = TRUE)
   )
+  
   expect_true(
     checkPkgDepFunctions(tag, includeBasePkgs = TRUE, suggests=FALSE)
   )
@@ -50,6 +57,8 @@ test_that("makeDepGraph and pgkDep gives similar results for MASS", {
 
 
 test_that("makeDepGraph and pgkDep gives similar results for chron", {
+  
+  skip_on_cran()
   
   tag <- "chron"
   
@@ -71,6 +80,8 @@ test_that("makeDepGraph and pgkDep gives similar results for chron", {
 
 test_that("makeDepGraph and pgkDep gives similar results for data.table", {
   
+  skip_on_cran()
+
   tag <- "data.table"
 
   expect_true(
@@ -90,6 +101,8 @@ test_that("makeDepGraph and pgkDep gives similar results for data.table", {
 
 test_that("makeDepGraph and pgkDep gives similar results for ggplot2", {
   
+  skip_on_cran()
+
   tag <- "ggplot2"
 
   expect_true(
@@ -110,6 +123,8 @@ test_that("makeDepGraph and pgkDep gives similar results for ggplot2", {
 
 test_that("makeDepGraph and pgkDep gives similar results for complex query", {
   
+  skip_on_cran()
+
   tag <- c("ggplot2", "data.table", "plyr", "knitr", "shiny", "xts", "lattice")
 
   expect_true(
