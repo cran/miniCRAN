@@ -38,7 +38,7 @@ index <- function(url, type="source", filters=NULL, head=5, cols=c("Package", "V
 
 The URL for the master mirror in Austria:
 
-```{r CRAN}
+```{r CRAN, eval=FALSE}
 CRAN <- "http://cran.r-project.org"
 index(CRAN)
 ```
@@ -48,7 +48,7 @@ index(CRAN)
 
 You can also point to any other mirror, for example the stable version hosted by Revolution Analytics:
 
-```{r revo}
+```{r revo, eval=FALSE}
 revoStable <- "http://packages.revolutionanalytics.com/cran/3.1/stable"
 index(revoStable)
  
@@ -60,7 +60,7 @@ index(revoMirror)
 
 R-forge has CRAN-like structure:
 
-```{r rforge}
+```{r rforge, eval=FALSE}
 rforge <- "http://r-forge.r-project.org"
 index(rforge)
 ```
@@ -69,7 +69,7 @@ index(rforge)
 
 Although BioConductor has a different preferred install mechanism, the underlying repository structure is also CRAN-like:
 
-```{r bioc}
+```{r bioc, eval=FALSE}
 bioc <- local({
   env <- new.env()
   on.exit(rm(env))

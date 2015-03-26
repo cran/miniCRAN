@@ -8,32 +8,32 @@ index <- function(url, type="source", filters=NULL, head=5, cols=c("Package", "V
 }
  
 
-## ----CRAN----------------------------------------------------------------
-CRAN <- "http://cran.r-project.org"
-index(CRAN)
+## ----CRAN, eval=FALSE----------------------------------------------------
+#  CRAN <- "http://cran.r-project.org"
+#  index(CRAN)
 
-## ----revo----------------------------------------------------------------
-revoStable <- "http://packages.revolutionanalytics.com/cran/3.1/stable"
-index(revoStable)
- 
-revoMirror <- "http://cran.revolutionanalytics.com"
-index(revoMirror)
+## ----revo, eval=FALSE----------------------------------------------------
+#  revoStable <- "http://packages.revolutionanalytics.com/cran/3.1/stable"
+#  index(revoStable)
+#  
+#  revoMirror <- "http://cran.revolutionanalytics.com"
+#  index(revoMirror)
 
-## ----rforge--------------------------------------------------------------
-rforge <- "http://r-forge.r-project.org"
-index(rforge)
+## ----rforge, eval=FALSE--------------------------------------------------
+#  rforge <- "http://r-forge.r-project.org"
+#  index(rforge)
 
-## ----bioc----------------------------------------------------------------
-bioc <- local({
-  env <- new.env()
-  on.exit(rm(env))
-  evalq(source("http://bioconductor.org/biocLite.R", local=TRUE), env)
-  biocinstallRepos()
-})
- 
-bioc
-bioc[grep("BioC", names(bioc))]
- 
- 
-index(bioc["BioCsoft"])
+## ----bioc, eval=FALSE----------------------------------------------------
+#  bioc <- local({
+#    env <- new.env()
+#    on.exit(rm(env))
+#    evalq(source("http://bioconductor.org/biocLite.R", local=TRUE), env)
+#    biocinstallRepos()
+#  })
+#  
+#  bioc
+#  bioc[grep("BioC", names(bioc))]
+#  
+#  
+#  index(bioc["BioCsoft"])
 
