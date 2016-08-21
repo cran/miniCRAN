@@ -1,13 +1,13 @@
-e6224b815365b2aacfff7a14e4751253 *DESCRIPTION
+c8763a79eecc3ed64236add9582c8d26 *DESCRIPTION
 6c6e67cbfb5da08f8c919444986111f9 *NAMESPACE
-b8e9dc13fba187e727df006eb689c397 *NEWS
+f616eb9b167d9b9473eddf181e21758e *NEWS
 e53b40a8db543bc19773b007694a3f87 *R/MRAN.R
 d19e2b26b5ec25544d8429a676b61ff9 *R/addPackages.R
 93d1118cdaed961b2c0ba94fa6e6fcbd *R/getCranDescription.R
 889b0f7b3bfda5be8edda6ca5f420645 *R/github-functions.R
 cd849aeafc3d231792d4169333d32c3b *R/helpers.R
 254eab9aba540c2ca63b5cde4f2399aa *R/makeDepGraph.R
-bf5f7c830cdc403cf0e82a13985dde65 *R/makeRepo.R
+1c6fdec4bbc37a3756f739718405a8c2 *R/makeRepo.R
 ba2fdb9d4a785a2ffc7f67a4606ff181 *R/minicran-package.R
 137f18c29e464a421aca7a0447d0f5c8 *R/pkgDep.R
 28d8e275a4aeeea9a698164b0a09fa25 *R/pkgDepTools.R
@@ -59,7 +59,7 @@ ae63f0437a841dd2628422737243b29d *man/repoBinPath.Rd
 242707df10e5bac271f8e343cf59da18 *tests/testthat/test-1-pkgDep.R
 e339c89434e0f66d9cf42c34d67b7315 *tests/testthat/test-2-makeDepGraph.R
 6b32309fde42eac881c3ec81a5f1db3f *tests/testthat/test-3-makeRepo.R
-c2dec5f0057b5f0c5f3aaa2a846f33f7 *tests/testthat/test-3b-makeRepo-from-localCRAN.R
+79c3650ea81c179864a1d8bf627dcad8 *tests/testthat/test-3b-makeRepo-from-localCRAN.R
 d4f43dd8dc7bd6fcfa7dd39ccac8b7ac *tests/testthat/test-4-updateRepo.R
 4530556f324f11d99be8445216430f21 *vignettes/miniCRAN-dependency-graph.rmd
 eba68c39499f29f88fbe0bc4705313d3 *vignettes/miniCRAN-introduction.rmd
