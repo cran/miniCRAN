@@ -1,6 +1,6 @@
 Package: miniCRAN
 Authors@R: c(person("Microsoft Corporation", role="cph"), person("Andrie", "de
-    Vries", role=c("aut", "cre"), email="adevries@microsoft.com"),
+    Vries", role=c("aut", "cre"), email="apdevries@gmail.com"),
     person("Alex", "Chubaty", role="ctb", email="alex.chubaty@gmail.com"))
 License: GPL-2
 Copyright: Microsoft Corporation
@@ -11,11 +11,14 @@ Description: Makes it possible to create an internally consistent
     reads the dependency tree for these packages, then downloads only this
     subset. The user can then install packages from this repository directly,
     rather than from CRAN.  This is useful in production settings, e.g. server
-    behind a firewall, or remote locations with slow broadband access.
-Date: 2017-07-20
-Version: 0.2.9
-URL: https://github.com/RevolutionAnalytics/miniCRAN
-BugReports: https://github.com/RevolutionAnalytics/miniCRAN/issues
+    behind a firewall, or remote locations with slow (or zero) Internet access.
+Date: 2017-10-21
+Version: 0.2.10
+URL: https://github.com/andrie/miniCRAN
+BugReports: https://github.com/andrie/miniCRAN/issues
+SystemRequirements: Imports the `curl` and `XML` packages. These have
+        system requirements on `libxml2-devel`, `libcurl-devel` and
+        `openssl-devel`.
 Imports: graphics, httr, magrittr, methods, stats, tools, utils, XML,
         igraph
 Suggests: devtools, knitr, rmarkdown, testthat(>= 0.9), covr, withr
@@ -24,11 +27,11 @@ LazyLoad: true
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2017-07-21 13:37:04 UTC; adevries
+Packaged: 2017-10-22 20:20:04 UTC; adevries
 Author: Microsoft Corporation [cph],
   Andrie de Vries [aut, cre],
   Alex Chubaty [ctb]
 Maintainer: Andrie de
- Vries <adevries@microsoft.com>
+ Vries <apdevries@gmail.com>
 Repository: CRAN
-Date/Publication: 2017-07-21 22:58:53 UTC
+Date/Publication: 2017-10-22 21:25:21 UTC
