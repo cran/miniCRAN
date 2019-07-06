@@ -2,7 +2,7 @@
 % Please edit documentation in R/getCranDescription.R
 \name{getCranDescription}
 \alias{getCranDescription}
-\title{Scrape DESCRIPTION from CRAN for each pkg.}
+\title{Obtains DESCRIPTION metadata from CRAN for each package.}
 \usage{
 getCranDescription(pkg, repos = getOption("repos"), type = "source",
   pkgs = pkgDep(pkg, repos = repos, type = type))
@@ -10,14 +10,18 @@ getCranDescription(pkg, repos = getOption("repos"), type = "source",
 \arguments{
 \item{pkg}{Character vector of packages.}
 
-\item{repos}{URL(s) of the 'contrib' sections of the repositories, e.g. \code{"http://cran.us.r-project.org"}. Passed to \code{\link[=available.packages]{available.packages()}}}
+\item{repos}{URL(s) of the 'contrib' sections of the repositories, e.g.
+\code{"http://cran.us.r-project.org"}. Passed to \code{\link[=available.packages]{available.packages()}}}
 
-\item{type}{Possible values are (currently) "source", "mac.binary" and "win.binary": the binary types can be listed and downloaded but not installed on other platforms.  Passed to \code{\link[=download.packages]{download.packages()}}.}
+\item{type}{Possible values are (currently) "source", "mac.binary" and
+"win.binary": the binary types can be listed and downloaded but not
+installed on other platforms.  Passed to \code{\link[=download.packages]{download.packages()}}.}
 
 \item{pkgs}{Character vector of packages to download}
 }
 \description{
-Scrape DESCRIPTION from CRAN for each pkg.
+This is a wrapper around \link[tools:CRAN_package_db]{tools::CRAN_package_db} and may be
+deprecated in future versions of the package.
 }
 \examples{
 \dontrun{

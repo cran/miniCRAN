@@ -1,53 +1,33 @@
-#' Downloads packages from CRAN to specified path and creates a local repository.
+#' Downloads packages from CRAN to specified path and creates a local
+#' repository.
 #'
-#' Given a list of packages, downloads these packages to a specified destination folder using the required CRAN folder structure, and finally creates the PACKAGES index file.  Since the folder structure mimics the required structure and files of a CRAN repository, it supports functions like [utils::install.packages()].
+#' Given a list of packages, downloads these packages to a specified destination
+#' folder using the required CRAN folder structure, and finally creates the
+#' PACKAGES index file.  Since the folder structure mimics the required
+#' structure and files of a CRAN repository, it supports functions like
+#' [utils::install.packages()].
 #'
-#' @section Repo folder structure:
-#' The folder structure of a repository
-#' \itemize{
-#'  \item{Root}
-#'  \itemize{
-#'    \item{src/contrib}
-#'    \itemize{
-#'      \item{PACKAGES}
-#'    }
-#'    \item{bin}
-#'    \itemize{
-#'      \item{windows/contrib/version}
-#'      \itemize{
-#'        \item{PACKAGES}
-#'      }
-#'      \item{macosx/contrib/version}
-#'      \itemize{
-#'        \item{PACKAGES}
-#'      }
-#'      \item{macosx/mavericks/contrib/version}
-#'      \itemize{
-#'        \item{PACKAGES}
-#'      }
-#'      \item{macosx/leopard/contrib/version}
-#'      \itemize{
-#'        \item{PACKAGES}
-#'      }
-#'    }
-#'  }
-#' }
+#' @template repo_folder_structure
 #'
-#' @note Internally makes use of [utils::download.packages()] and [write_PACKAGES()]
+#' @note Internally makes use of [utils::download.packages()] and
+#'   [write_PACKAGES()]
 #'
 #' @inheritParams pkgDep
 #'
 #' @param pkgs Character vector of packages to download
 #'
-#' @param path Destination download path. This path is the root folder of your new repository.
+#' @param path Destination download path. This path is the root folder of your
+#'   new repository.
 #'
-#' @param Rversion List with two named elements: `major` and `minor`. If not supplied, defaults to system version of R, using [R.version].  Only used if `type` is not "source"
+#' @template Rversion
 #'
 #' @param download If TRUE downloads packages.
 #'
-#' @param quiet If TRUE, suppress status messages (if any), and the progress bar during download.
+#' @param quiet If TRUE, suppress status messages (if any), and the progress bar
+#'   during download.
 #'
-#' @param writePACKAGES If TRUE, calls [write_PACKAGES()] to update the repository PACKAGES file.
+#' @param writePACKAGES If TRUE, calls [write_PACKAGES()] to update the
+#'   repository PACKAGES file.
 #'
 #' @export
 #' @family update repo functions
@@ -73,7 +53,7 @@ makeRepo <- function(pkgs, path, repos = getOption("repos"), type = "source",
     pdb <- pkgAvail(repos = repos, type = t, Rversion = Rversion)
 
     if (download) {
-      download.packages(pkgs, destdir = pkgPath, available = pdb, repos = repos,
+      download_packages(pkgs, destdir = pkgPath, available = pdb, repos = repos,
                         contriburl = contribUrl(repos, t, Rversion),
                         type = t, quiet = quiet)
     }

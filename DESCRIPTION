@@ -1,11 +1,13 @@
 Package: miniCRAN
-Date: 2018-01-15
-Version: 0.2.11
-Authors@R: c(person("Microsoft Corporation", role="cph"), person("Andrie", "de
-    Vries", role=c("aut", "cre", "cph"), email="apdevries@gmail.com"),
-    person("Alex", "Chubaty", role="ctb", email="alex.chubaty@gmail.com"))
+Date: 2019-07-06
+Version: 0.2.12
+Authors@R: c(
+    person("Andrie", "de Vries", role=c("aut", "cre", "cph"), email="apdevries@gmail.com"),
+    person("Alex", "Chubaty", role="ctb", email="alex.chubaty@gmail.com"),
+    person("Microsoft Corporation", role="cph")
+    )
 License: GPL-2
-Copyright: Microsoft Corporation, Andrie de Vries
+Copyright: Andrie de Vries, Microsoft Corporation
 Title: Create a Mini Version of CRAN Containing Only Selected Packages
 Description: Makes it possible to create an internally consistent
     repository consisting of selected packages from CRAN-like repositories.
@@ -20,18 +22,20 @@ SystemRequirements: Imports the `curl` and `XML` packages. These have
         system requirements on `libxml2-devel`, `libcurl-devel` and
         `openssl-devel`.
 Imports: graphics, httr, methods, stats, tools, utils, XML, igraph,
-Suggests: devtools, knitr, rmarkdown, testthat(>= 0.9), covr, withr,
-        mockery, testthis
+        assertthat
+Suggests: devtools, knitr, rmarkdown, testthat (>= 2.1.0), covr, withr,
+        mockery, testthis, roxygen2
 LazyData: true
 LazyLoad: true
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
+Encoding: UTF-8
+Language: en-GB
 NeedsCompilation: no
-Packaged: 2018-01-15 15:40:51 UTC; apdev
-Author: Microsoft Corporation [cph],
-  Andrie de Vries [aut, cre, cph],
-  Alex Chubaty [ctb]
-Maintainer: Andrie de
- Vries <apdevries@gmail.com>
+Packaged: 2019-07-06 18:07:37 UTC; apdev
+Author: Andrie de Vries [aut, cre, cph],
+  Alex Chubaty [ctb],
+  Microsoft Corporation [cph]
+Maintainer: Andrie de Vries <apdevries@gmail.com>
 Repository: CRAN
-Date/Publication: 2018-01-15 18:52:52 UTC
+Date/Publication: 2019-07-06 18:30:03 UTC
