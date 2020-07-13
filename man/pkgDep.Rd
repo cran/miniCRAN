@@ -4,9 +4,19 @@
 \alias{pkgDep}
 \title{Retrieves package dependencies.}
 \usage{
-pkgDep(pkg, availPkgs, repos = getOption("repos"), type = "source",
-  depends = TRUE, suggests = TRUE, enhances = FALSE,
-  includeBasePkgs = FALSE, Rversion = R.version, quiet = FALSE, ...)
+pkgDep(
+  pkg,
+  availPkgs,
+  repos = getOption("repos"),
+  type = "source",
+  depends = TRUE,
+  suggests = TRUE,
+  enhances = FALSE,
+  includeBasePkgs = FALSE,
+  Rversion = R.version,
+  quiet = FALSE,
+  ...
+)
 }
 \arguments{
 \item{pkg}{Character vector of packages.}
@@ -36,12 +46,15 @@ installed on other platforms.  Passed to \code{\link[=download.packages]{downloa
 \item a character string with the two digit R version, e.g. "3.1"
 \item a list with components \code{major} and \code{minor}
 \item the result of \code{\link[=getRversion]{getRversion()}}
-\item the result of \code{\link[=R.version]{R.version()}}
+\item the result of \link{R.version}
 }}
 
 \item{quiet}{If TRUE, suppresses warnings}
 
 \item{...}{Other arguments passed to \code{\link[=available.packages]{available.packages()}}}
+}
+\value{
+character vector of package names
 }
 \description{
 Performs recursive retrieve for \code{Depends}, \code{Imports} and \code{LinkLibrary}.
@@ -64,8 +77,9 @@ pkgDep(pkg = c("ggplot2", "plyr", "reshape2"), pdb)
 
 }
 \seealso{
-Other dependency functions: \code{\link{basePkgs}},
-  \code{\link{makeDepGraph}},
-  \code{\link{plot.pkgDepGraph}}
+Other dependency functions: 
+\code{\link{basePkgs}()},
+\code{\link{makeDepGraph}()},
+\code{\link{plot.pkgDepGraph}()}
 }
 \concept{dependency functions}

@@ -4,8 +4,7 @@
 \alias{checkVersions}
 \title{Check for previous versions of packages in a miniCRAN repository.}
 \usage{
-checkVersions(pkgs = NULL, path = NULL, type = "source",
-  Rversion = R.version)
+checkVersions(pkgs = NULL, path = NULL, type = "source", Rversion = R.version)
 }
 \arguments{
 \item{pkgs}{Character vector of packages to be installed. If not provided,
@@ -21,12 +20,15 @@ install. See \code{\link[=install.packages]{install.packages()}}.}
 \item a character string with the two digit R version, e.g. "3.1"
 \item a list with components \code{major} and \code{minor}
 \item the result of \code{\link[=getRversion]{getRversion()}}
-\item the result of \code{\link[=R.version]{R.version()}}
+\item the result of \link{R.version}
 }}
 }
 \value{
 Returns invisibly the file paths to packages with multiple versions
 for removal.
+
+list with an element for each \code{type}, consisting of a character
+vector of download paths
 }
 \description{
 Checks for previous versions, and returns the file paths for packages with
@@ -36,7 +38,8 @@ multiple versions. You can subsequently decide which version to keep.
 ### `checkVersions` and `add.packages.miniCRAN` require an existing miniCRAN repo
 
 # Specify list of packages to download
-revolution <- c(CRAN = getOption("miniCRAN.mran"))
+revolution <- c(CRAN = getOption("minicran.mran"))
+revolution
 pkgs <- c("foreach")
 pkgTypes <- c("source", "win.binary")
 
@@ -86,8 +89,10 @@ pkgList
 }
 }
 \seealso{
-Other update repo functions: \code{\link{addOldPackage}},
-  \code{\link{addPackage}}, \code{\link{makeRepo}},
-  \code{\link{updatePackages}}
+Other update repo functions: 
+\code{\link{addOldPackage}()},
+\code{\link{addPackage}()},
+\code{\link{makeRepo}()},
+\code{\link{updatePackages}()}
 }
 \concept{update repo functions}

@@ -1,4 +1,4 @@
-## ----setup---------------------------------------------------------------
+## ----setup--------------------------------------------------------------------
 # Wrapper around available.packages ---------------------------------------
  
 index <- function(url, type = "source", filters = NULL, head = 5, cols = c("Package", "Version")) {
@@ -8,22 +8,22 @@ index <- function(url, type = "source", filters = NULL, head = 5, cols = c("Pack
 }
  
 
-## ----CRAN, eval=FALSE----------------------------------------------------
+## ----CRAN, eval=FALSE---------------------------------------------------------
 #  CRAN <- "http://cran.r-project.org"
 #  index(CRAN)
 
-## ----revo, eval=FALSE----------------------------------------------------
+## ----revo, eval=FALSE---------------------------------------------------------
 #  revoStable <- "http://packages.revolutionanalytics.com/cran/3.1/stable"
 #  index(revoStable)
 #  
 #  revoMirror <- "http://cran.revolutionanalytics.com"
 #  index(revoMirror)
 
-## ----rforge, eval=FALSE--------------------------------------------------
+## ----rforge, eval=FALSE-------------------------------------------------------
 #  rforge <- "http://r-forge.r-project.org"
 #  index(rforge)
 
-## ----bioc, eval=FALSE----------------------------------------------------
+## ----bioc, eval=FALSE---------------------------------------------------------
 #  bioc <- local({
 #    env <- new.env()
 #    on.exit(rm(env))

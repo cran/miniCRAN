@@ -4,9 +4,17 @@
 \alias{addOldPackage}
 \title{Add old package versions to a miniCRAN repository.}
 \usage{
-addOldPackage(pkgs = NULL, path = NULL, vers = NULL,
-  repos = getOption("repos"), type = "source", Rversion = R.version,
-  writePACKAGES = TRUE, deps = FALSE, quiet = TRUE)
+addOldPackage(
+  pkgs = NULL,
+  path = NULL,
+  vers = NULL,
+  repos = getOption("repos"),
+  type = "source",
+  Rversion = R.version,
+  writePACKAGES = TRUE,
+  deps = FALSE,
+  quiet = TRUE
+)
 }
 \arguments{
 \item{pkgs}{Character vector of packages to download}
@@ -28,7 +36,7 @@ installed on other platforms.  Passed to \code{\link[=download.packages]{downloa
 \item a character string with the two digit R version, e.g. "3.1"
 \item a list with components \code{major} and \code{minor}
 \item the result of \code{\link[=getRversion]{getRversion()}}
-\item the result of \code{\link[=R.version]{R.version()}}
+\item the result of \link{R.version}
 }}
 
 \item{writePACKAGES}{If TRUE, calls \code{\link[=write_PACKAGES]{write_PACKAGES()}} to update the
@@ -59,7 +67,8 @@ automatically and must be specified by the user in \code{pkgs} and \code{vers}. 
 ### `checkVersions` and `add.packages.miniCRAN` require an existing miniCRAN repo
 
 # Specify list of packages to download
-revolution <- c(CRAN = getOption("miniCRAN.mran"))
+revolution <- c(CRAN = getOption("minicran.mran"))
+revolution
 pkgs <- c("foreach")
 pkgTypes <- c("source", "win.binary")
 
@@ -109,8 +118,10 @@ pkgList
 }
 }
 \seealso{
-Other update repo functions: \code{\link{addPackage}},
-  \code{\link{checkVersions}}, \code{\link{makeRepo}},
-  \code{\link{updatePackages}}
+Other update repo functions: 
+\code{\link{addPackage}()},
+\code{\link{checkVersions}()},
+\code{\link{makeRepo}()},
+\code{\link{updatePackages}()}
 }
 \concept{update repo functions}
