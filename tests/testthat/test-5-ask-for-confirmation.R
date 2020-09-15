@@ -25,7 +25,7 @@ test_that("asking for confirmation", {
         z <- 
           ask_to_update(old, "source", "3.1", ask = TRUE)
       )
-      expect_equivalent(old, z)
+      expect_equal(old, z, ignore_attr = TRUE)
     }
   )
 
@@ -42,7 +42,7 @@ test_that("asking for confirmation", {
   )
 
   with_mock(
-    read_line_wrapper = function(...) { "n" },
+    read_line_wrapper = function(...) { "y" },
     graphics_capable = function() { TRUE },
     select_from_list = function(choices, ...) { choices },
     .env = "miniCRAN", 
@@ -51,7 +51,7 @@ test_that("asking for confirmation", {
         z <- 
           ask_to_update(old, "source", "3.1", ask = "graphics")
       )
-      expect_equivalent(old, z)
+      expect_equal(old, z, ignore_attr = TRUE)
     }
   )
   
