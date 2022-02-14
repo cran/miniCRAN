@@ -17,7 +17,9 @@ old <- matrix(
 
 test_that("asking for confirmation", {
   
-  with_mock(
+  skip_if_not_installed("mockr") 
+  
+  mockr::with_mock(
     read_line_wrapper = function(...) { "y" },
     .env = "miniCRAN", 
     {
@@ -29,7 +31,7 @@ test_that("asking for confirmation", {
     }
   )
 
-  with_mock(
+ mockr::with_mock(
     read_line_wrapper = function(...) { "n" },
     .env = "miniCRAN", 
     {
@@ -41,7 +43,7 @@ test_that("asking for confirmation", {
     }
   )
 
-  with_mock(
+ mockr::with_mock(
     read_line_wrapper = function(...) { "y" },
     graphics_capable = function() { TRUE },
     select_from_list = function(choices, ...) { choices },

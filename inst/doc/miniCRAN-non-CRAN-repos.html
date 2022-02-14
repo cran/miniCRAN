@@ -12,7 +12,7 @@
 
 <meta name="author" content="Andrie de Vries" />
 
-<meta name="date" content="2020-09-15" />
+<meta name="date" content="2022-02-13" />
 
 <title>Using repositories other than CRAN with miniCRAN</title>
 
@@ -30,12 +30,29 @@ document.addEventListener('DOMContentLoaded', function(e) {
 });
 </script>
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
-<style type="text/css">code{white-space: pre;}</style>
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -118,6 +135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 })();
 </script>
+
 
 
 
@@ -313,58 +331,67 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<h1 class="title toc-ignore">Using repositories other than CRAN with miniCRAN</h1>
+<h1 class="title toc-ignore">Using repositories other than CRAN with
+miniCRAN</h1>
 <h4 class="author">Andrie de Vries</h4>
-<h4 class="date">September 15, 2020</h4>
+<h4 class="date">February 13, 2022</h4>
 
 
 
-<p>Although the package name <code>miniCRAN</code> seems to indicate you can only use CRAN as a repository, you can in fact use any CRAN-like repository.</p>
-<p>This vignette contains some examples of how to refer to different package repositories, including CRAN, alternative mirrors of CRAN, R-Forge as well as BioConductor.</p>
-<p>To simplify the code to show the salient features, we use a little helper function, <code>index()</code> that is a simple wrapper around <code>available.packages()</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co"># Wrapper around available.packages ---------------------------------------</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a> </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>index &lt;-<span class="st"> </span><span class="cf">function</span>(url, <span class="dt">type =</span> <span class="st">&quot;source&quot;</span>, <span class="dt">filters =</span> <span class="ot">NULL</span>, <span class="dt">head =</span> <span class="dv">5</span>, <span class="dt">cols =</span> <span class="kw">c</span>(<span class="st">&quot;Package&quot;</span>, <span class="st">&quot;Version&quot;</span>)) {</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  contribUrl &lt;-<span class="st"> </span><span class="kw">contrib.url</span>(url, <span class="dt">type =</span> type)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>  p &lt;-<span class="st"> </span><span class="kw">available.packages</span>(contribUrl, <span class="dt">type =</span> type, <span class="dt">filters =</span> filters)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>  p[<span class="dv">1</span><span class="op">:</span>head, cols]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>}</span></code></pre></div>
+<p>Although the package name <code>miniCRAN</code> seems to indicate you
+can only use CRAN as a repository, you can in fact use any CRAN-like
+repository.</p>
+<p>This vignette contains some examples of how to refer to different
+package repositories, including CRAN, alternative mirrors of CRAN,
+R-Forge as well as BioConductor.</p>
+<p>To simplify the code to show the salient features, we use a little
+helper function, <code>index()</code> that is a simple wrapper around
+<code>available.packages()</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrapper around available.packages ---------------------------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="cf">function</span>(url, <span class="at">type =</span> <span class="st">&quot;source&quot;</span>, <span class="at">filters =</span> <span class="cn">NULL</span>, <span class="at">head =</span> <span class="dv">5</span>, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;Package&quot;</span>, <span class="st">&quot;Version&quot;</span>)) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  contribUrl <span class="ot">&lt;-</span> <span class="fu">contrib.url</span>(url, <span class="at">type =</span> type)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">available.packages</span>(contribUrl, <span class="at">type =</span> type, <span class="at">filters =</span> filters)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">1</span><span class="sc">:</span>head, cols]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <div id="using-cran" class="section level2">
 <h2>Using CRAN</h2>
 <p>The URL for the master mirror in Austria:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>CRAN &lt;-<span class="st"> &quot;http://cran.r-project.org&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">index</span>(CRAN)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>CRAN <span class="ot">&lt;-</span> <span class="st">&quot;http://cran.r-project.org&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">index</span>(CRAN)</span></code></pre></div>
 </div>
 <div id="using-a-different-mirror" class="section level2">
 <h2>Using a different mirror</h2>
-<p>You can also point to any other mirror, for example the stable version hosted by Revolution Analytics:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>revoStable &lt;-<span class="st"> &quot;http://packages.revolutionanalytics.com/cran/3.1/stable&quot;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="kw">index</span>(revoStable)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a> </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>revoMirror &lt;-<span class="st"> &quot;http://cran.revolutionanalytics.com&quot;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="kw">index</span>(revoMirror)</span></code></pre></div>
+<p>You can also point to any other mirror, for example the stable
+version hosted by Revolution Analytics:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>revoStable <span class="ot">&lt;-</span> <span class="st">&quot;http://packages.revolutionanalytics.com/cran/3.1/stable&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">index</span>(revoStable)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>revoMirror <span class="ot">&lt;-</span> <span class="st">&quot;http://cran.revolutionanalytics.com&quot;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">index</span>(revoMirror)</span></code></pre></div>
 </div>
 <div id="using-r-forge" class="section level2">
 <h2>Using R-forge</h2>
 <p>R-forge has CRAN-like structure:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>rforge &lt;-<span class="st"> &quot;http://r-forge.r-project.org&quot;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="kw">index</span>(rforge)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rforge <span class="ot">&lt;-</span> <span class="st">&quot;http://r-forge.r-project.org&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">index</span>(rforge)</span></code></pre></div>
 </div>
 <div id="using-bioconductor" class="section level2">
 <h2>Using BioConductor</h2>
-<p>Although BioConductor has a different preferred install mechanism, the underlying repository structure is also CRAN-like:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>bioc &lt;-<span class="st"> </span><span class="kw">local</span>({</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>  env &lt;-<span class="st"> </span><span class="kw">new.env</span>()</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>  <span class="kw">on.exit</span>(<span class="kw">rm</span>(env))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>  <span class="kw">evalq</span>(<span class="kw">source</span>(<span class="st">&quot;http://bioconductor.org/biocLite.R&quot;</span>, <span class="dt">local =</span> <span class="ot">TRUE</span>), env)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>  <span class="kw">biocinstallRepos</span>()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>})</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a> </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a>bioc</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a>bioc[<span class="kw">grep</span>(<span class="st">&quot;BioC&quot;</span>, <span class="kw">names</span>(bioc))]</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a> </span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a> </span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a><span class="kw">index</span>(bioc[<span class="st">&quot;BioCsoft&quot;</span>])</span></code></pre></div>
+<p>Although BioConductor has a different preferred install mechanism,
+the underlying repository structure is also CRAN-like:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bioc <span class="ot">&lt;-</span> <span class="fu">local</span>({</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  env <span class="ot">&lt;-</span> <span class="fu">new.env</span>()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">on.exit</span>(<span class="fu">rm</span>(env))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">evalq</span>(<span class="fu">source</span>(<span class="st">&quot;http://bioconductor.org/biocLite.R&quot;</span>, <span class="at">local =</span> <span class="cn">TRUE</span>), env)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">biocinstallRepos</span>()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>bioc</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>bioc[<span class="fu">grep</span>(<span class="st">&quot;BioC&quot;</span>, <span class="fu">names</span>(bioc))]</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">index</span>(bioc[<span class="st">&quot;BioCsoft&quot;</span>])</span></code></pre></div>
 </div>
 
 

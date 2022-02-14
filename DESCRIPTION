@@ -1,5 +1,5 @@
 Package: miniCRAN
-Version: 0.2.14
+Version: 0.2.16
 Authors@R: c(
     person("Andrie", "de Vries", role=c("aut", "cre", "cph"), email="apdevries@gmail.com"),
     person("Alex", "Chubaty", role="ctb", email="alex.chubaty@gmail.com"),
@@ -20,19 +20,19 @@ BugReports: https://github.com/andrie/miniCRAN/issues
 Imports: graphics, httr, methods, stats, tools, utils, igraph,
         assertthat (>= 0.2.0)
 Suggests: devtools, knitr, rmarkdown, testthat (>= 2.1.0), covr, withr,
-        mockery, testthis, roxygen2
+        mockery, testthis, roxygen2, mockr, spelling
 LazyData: true
 LazyLoad: true
 VignetteBuilder: knitr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Encoding: UTF-8
-Language: en-GB
+Language: en-US
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2020-09-15 17:59:45 UTC; apdev
+Packaged: 2022-02-13 21:42:00 UTC; apdev
 Author: Andrie de Vries [aut, cre, cph],
   Alex Chubaty [ctb],
   Microsoft Corporation [cph]
 Maintainer: Andrie de Vries <apdevries@gmail.com>
 Repository: CRAN
-Date/Publication: 2020-09-15 19:10:03 UTC
+Date/Publication: 2022-02-14 09:00:05 UTC
