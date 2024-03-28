@@ -1,5 +1,5 @@
 Package: miniCRAN
-Version: 0.2.16
+Version: 0.3.0
 Authors@R: c(
     person("Andrie", "de Vries", role=c("aut", "cre", "cph"), email="apdevries@gmail.com"),
     person("Alex", "Chubaty", role="ctb", email="alex.chubaty@gmail.com"),
@@ -24,15 +24,15 @@ Suggests: devtools, knitr, rmarkdown, testthat (>= 2.1.0), covr, withr,
 LazyData: true
 LazyLoad: true
 VignetteBuilder: knitr
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.1
 Encoding: UTF-8
 Language: en-US
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2022-02-13 21:42:00 UTC; apdev
+Packaged: 2024-03-28 20:42:22 UTC; apdev
 Author: Andrie de Vries [aut, cre, cph],
   Alex Chubaty [ctb],
   Microsoft Corporation [cph]
 Maintainer: Andrie de Vries <apdevries@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-02-14 09:00:05 UTC
+Date/Publication: 2024-03-28 21:00:02 UTC

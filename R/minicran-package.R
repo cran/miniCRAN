@@ -76,8 +76,8 @@
 #'
 #' @section Package options:
 #'
-#'   \describe{ \item{\code{minicran.mran}}{preferred MRAN URL. Defaults to
-#'   \url{https://mran.microsoft.com} for R versions 3.2.2 and greater. Versions
+#'   \describe{ \item{\code{minicran.mran}}{preferred p3m URL. Defaults to
+#'   \url{https://packagemanager.posit.co/cran} for R versions 3.2.2 and greater. Versions
 #'   earlier than 3.2.2 use HTTP instead of HTTPS.} }
 #'
 #' @name miniCRAN-package

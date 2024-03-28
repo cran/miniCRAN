@@ -1,11 +1,19 @@
 # helper functions for testing
 
+hostname <- function(x) {
+  y <- sub("https*://", "", x)
+  sub("latest$", "", y)
+}
+
 
 # Interrupt the test if url can not be reached
-skip_if_offline <- function(url = NULL) {
-  if (is.null(url)) url <- MRAN()
+skip_if_offline <- function(url = p3m()) {
+  # browser()
+  mran_host <- hostname(p3m())
+  if (is.null(url)) url <- mran_host
   if (!is.online(url = url)) testthat::skip("offline")
 }
+
 
 
 set_test_types <- function() {
@@ -16,7 +24,7 @@ set_test_types <- function() {
     )
   
   types <- gsub(" +", "", types)
-  strsplit(types, ",")[[1]]
+  unname(strsplit(types, ",")[[1]])
 }
 
 
@@ -76,45 +84,44 @@ mock_write_packages <- function(dir, type = "source", r_version) {
     rownames(db) <- db[, "Package"]
     r_version <- twodigitRversion(r_version)
     if (r_version >= "3.5.0") {
-      saveRDS(db, file.path(dir, "PACKAGES.rds"), compress = "xz")
+      saveRDS(db, file.path(dir, "PACKAGES.rds"))
     } else {
-      saveRDS(db, file.path(dir, "PACKAGES.rds"), compress = "xz", version = 2)
+      saveRDS(db, file.path(dir, "PACKAGES.rds"), version = 2)
     }
   }
   np
 }
 
 
-# Create sample repo from MRAN snapshot
-.createSampleRepo <- function(MRAN, path, pkgs, Rversion = "3.1") {
-  if (missing(MRAN)) MRAN <- MRAN("2014-10-15")
+# Create sample repo from p3m snapshot
+.createSampleRepo <- function(p3m, path, pkgs, Rversion = "4.0", types) {
+  if (missing(p3m)) p3m <- p3m("2024-01-02")
   if (missing(path)) path <- file.path(tempdir(), "miniCRAN", Sys.Date())
-  if (missing(pkgs)) pkgs <- c("chron", "adaptivetau")
+  if (missing(pkgs)) pkgs <- c("chron", "curl")
+  if (missing(types)) types <- set_test_types() 
 
-  pdb_source <- pkgAvail(repos = MRAN, type = "source", Rversion = Rversion)
-  pdb_win    <- pkgAvail(repos = MRAN, type = "win.binary", Rversion = Rversion)
-  pdb_mac    <- pkgAvail(repos = MRAN, type = "mac.binary", Rversion = Rversion)
+  # pdb_source <- pkgAvail(repos = p3m, type = "source", Rversion = Rversion)
+  # pdb_win    <- pkgAvail(repos = p3m, type = "win.binary", Rversion = Rversion)
+  # pdb_mac    <- pkgAvail(repos = p3m, type = "mac.binary", Rversion = Rversion)
 
-  pkgList_source <- pkgDep(pkgs, availPkgs = pdb_source, repos = MRAN,
-                           type = "source", suggests = FALSE, Rversion = Rversion)
-  
-  makeRepo(pkgList_source, path = path, repos = MRAN,
-           type = "source",
-           quiet = TRUE, Rversion = Rversion)
-  
-  pkgList_win <- pkgDep(pkgs, availPkgs = pdb_win, repos = MRAN,
-                        type = "win.binary",
-                        suggests = FALSE, Rversion = Rversion)
-  makeRepo(pkgList_win, path = path, repos = MRAN,
-           type = "win.binary",
-           quiet = TRUE, Rversion = Rversion)
-  
-  pkgList_mac <- pkgDep(pkgs, availPkgs = pdb_mac, repos = MRAN,
-                        type = "mac.binary",
-                        suggests = FALSE, Rversion = Rversion)
-  makeRepo(pkgList_mac, path = path, repos = MRAN,
-           type = "mac.binary",
-           quiet = TRUE, Rversion = Rversion)
+  mockr::with_mock(
+    download_packages = mock_download_packages,
+    write_packages = mock_write_packages,
+    .env = "miniCRAN",
+    {
+
+      for (type in types) {
+        pdb <- pkgAvail(repos = p3m, type = type, Rversion = Rversion)
+        pkgList_source <- pkgDep(pkgs, availPkgs = pdb, repos = p3m,
+          type = type, suggests = FALSE, Rversion = Rversion)
+          
+        makeRepo(pkgList_source, path = path, repos = p3m,
+          type = type,
+          quiet = TRUE, Rversion = Rversion)
+
+      }
+  }
+)
 }
 
 make_fake_package <- function(version = "0.1.0", base_path = tempdir()) {

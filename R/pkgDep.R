@@ -8,9 +8,11 @@
 #' @family dependency functions
 #'
 #' @seealso [pkgDep()]
-basePkgs <- function()names(which(installed.packages()[, "Priority"] == "base"))
+basePkgs <- function() names(which(installed.packages()[, "Priority"] == "base"))
 
-
+availPkgNames <- function(pdb) {
+  pdb[, "Package"]
+}
 
 #' Retrieves package dependencies.
 #'
@@ -25,7 +27,7 @@ basePkgs <- function()names(which(installed.packages()[, "Priority"] == "base"))
 #'   from CRAN, using [available.packages()]
 #'
 #' @param repos URL(s) of the 'contrib' sections of the repositories, e.g.
-#'   `"http://cran.us.r-project.org"`. Passed to [available.packages()]
+#'   `"https://cran.us.r-project.org"`. Passed to [available.packages()]
 #'
 #' @param type Possible values are (currently) "source", "mac.binary" and
 #'   "win.binary": the binary types can be listed and downloaded but not
@@ -67,17 +69,21 @@ pkgDep <- function(pkg, availPkgs, repos = getOption("repos"), type = "source",
 
   if (missing(availPkgs)) {
     if (!is.null(names(repos)) & repos["CRAN"] == "@CRAN@") {
-      repos <- MRAN()
+      repos <- p3m()
     }
     if (is.na(type)) type <- "source"
     availPkgs <- pkgAvail(repos = repos, type = type, Rversion = Rversion,
                           quiet = quiet, ...)
   }
   
-  assert_that(nrow(availPkgs) > 0, msg = "Unable to retrieve available packages from CRAN")
+  assert_that(
+    nrow(availPkgs) > 0, 
+    msg = sprintf("Unable to retrieve %s package %s from %s", type, pkg, repos)
+  )
 
 
   pkgInAvail <- pkg %in% availPkgs[, "Package"]
+  pkgInAvail <- pkg %in% availPkgNames(availPkgs)
   if (sum(pkgInAvail) == 0 ) stop("No valid packages in pkg")
   if (sum(pkgInAvail) < length(pkg)) {
     warning("Package not recognized: ", paste(pkg[!pkgInAvail], collapse = ", "))
@@ -146,12 +152,16 @@ print.pkgDep <- function(x, ...) {
 #' repository, otherwise attempts to read from a CRAN mirror at the `repos` url.
 #'
 #' @inheritParams pkgDep
+#' 
+#' @param filters passed to [utils::available.packages]
+#' 
 #' @export
 #' @family create repo functions
 #' @seealso [pkgDep()]
 pkgAvail <- function(repos = getOption("repos"), 
                      type = "source", 
-                     Rversion = R.version, quiet = FALSE) {
+                     Rversion = R.version, quiet = FALSE,
+                    filters = NULL) {
   assert_that(is_repos(repos))
   if (!grepl("^https*://|file:///", repos[1]) && file.exists(repos[1])) {
      repos <- paste0("file:///", normalizePath(repos[1],
@@ -159,7 +169,7 @@ pkgAvail <- function(repos = getOption("repos"),
                                                winslash = "/"))
   } else {
     if (!is.null(names(repos)) && isTRUE(unname(repos["CRAN"]) == "@CRAN@")) {
-      repos <- MRAN()
+      repos <- p3m()
     }
   }
   ap <- function() {
@@ -169,7 +179,7 @@ pkgAvail <- function(repos = getOption("repos"),
                  type = type, 
                  Rversion = Rversion), 
       type = type, 
-      filters = list(),
+      filters = filters,
       repos = repos
     )
     } else {
@@ -178,7 +188,7 @@ pkgAvail <- function(repos = getOption("repos"),
                    type = type, 
                    Rversion = Rversion), 
         type = type, 
-        filters = list()
+        filters = filters
       )
     }
   }
