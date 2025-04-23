@@ -1,5 +1,5 @@
 Package: miniCRAN
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: c(
     person("Andrie", "de Vries", role=c("aut", "cre", "cph"), email="apdevries@gmail.com"),
     person("Alex", "Chubaty", role="ctb", email="alex.chubaty@gmail.com"),
@@ -29,10 +29,10 @@ Encoding: UTF-8
 Language: en-US
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2024-03-28 20:42:22 UTC; apdev
+Packaged: 2025-04-23 11:04:16 UTC; apdev
 Author: Andrie de Vries [aut, cre, cph],
   Alex Chubaty [ctb],
   Microsoft Corporation [cph]
 Maintainer: Andrie de Vries <apdevries@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-03-28 21:00:02 UTC
+Date/Publication: 2025-04-23 11:20:02 UTC

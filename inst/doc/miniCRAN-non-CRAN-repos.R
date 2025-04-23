@@ -10,14 +10,14 @@ index <- function(url, type = "source", filters = NULL, head = 5,
  
 
 ## ----CRAN, eval=FALSE---------------------------------------------------------
-#  CRAN <- "https://cran.r-project.org"
-#  index(CRAN)
+# CRAN <- "https://cran.r-project.org"
+# index(CRAN)
 
 ## ----p3m, eval=FALSE----------------------------------------------------------
-#  p3m <- "https://packagemanager.posit.co/cran/2024-01-02"
-#  index(p3m)
+# p3m <- "https://packagemanager.posit.co/cran/2024-01-02"
+# index(p3m)
 
 ## ----rforge, eval=FALSE-------------------------------------------------------
-#  rforge <- "https://r-forge.r-project.org"
-#  index(rforge)
+# rforge <- "https://r-forge.r-project.org"
+# index(rforge)
 
